@@ -1,0 +1,8 @@
+.RData
+.Rhistory
+.Rproj.user/
+*.rds
+dados/inmet_estacoes_bruto.csv
+dados/openmeteo_horario_*.csv
+dados/*.xlsx
+rsconnect/
