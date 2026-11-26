@@ -155,12 +155,12 @@ tema <- bs_theme(version = 5, primary = COR$laranja_queimado, secondary = COR$pe
                  "body-bg" = "#FFFFFF")
 css <- sprintf("
 .hdr{background:linear-gradient(100deg,%s 0%%,%s 100%%);color:#fff;padding:14px 22px 0 22px;}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.hdr-top{display:flex;align-items:center;justify-content:center;text-align:center;gap:16px;}
 .hdr h1{font-size:1.6rem;font-weight:800;margin:0;text-align:center;}
 .hdr p{margin:2px 0 8px;text-align:center;font-size:.95rem;opacity:.95;}
 .chip{background:#fff;border-radius:10px;padding:6px 10px;display:flex;align-items:center;}
 .chip img{height:46px;}
-.hdr-sub{background:%s;margin:0 -22px;padding:7px 22px;font-size:.85rem;color:#fff;}
+.hdr-sub{background:%s;margin:0 -22px;padding:7px 22px;font-size:.85rem;color:#fff;text-align:center;}
 .nav-tabs{background:%s;border-bottom:3px solid %s;padding:6px 8px 0 8px;flex-wrap:wrap;}
 .nav-tabs .nav-link{color:%s;font-weight:600;border:0;border-radius:6px 6px 0 0;}
 .nav-tabs .nav-link.active{background:%s;color:#fff;}
