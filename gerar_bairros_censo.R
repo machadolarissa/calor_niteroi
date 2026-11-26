@@ -27,7 +27,7 @@ options(timeout = 600)
 
 baixar <- function(url, destino) {
   utils::download.file(url, destino, mode = "wb", quiet = TRUE, method = "libcurl",
-                       headers = c("User-Agent" = "Mozilla/5.0 (CISNit coleta publica)"))
+                       headers = c("User-Agent" = "Mozilla/5.0 (coleta publica)"))
   stopifnot(file.exists(destino), file.size(destino) > 0); destino
 }
 # Procura no indice da pasta o link que casa com o padrao (os nomes levam data e mudam)

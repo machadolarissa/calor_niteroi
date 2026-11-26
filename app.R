@@ -1,7 +1,7 @@
 # =====================================================================
-# Painel de Calor e Saude - Niteroi (modelo)  |  CISNit
+# Painel de Calor e Saude - Niteroi (modelo)
 # Layout inspirado no Painel de Indicadores de Tuberculose (IESC/UFRJ)
-# Cores: paleta do CISNit, com foco no laranja.
+# Cores: paleta com foco no laranja.
 #
 # Le os arquivos gerados por coletar_dados_calor.R (pasta dados/):
 #   openmeteo_diario_niteroi.csv       (data, tmax, tmin, tmed, umid_med, ic_max)
@@ -23,7 +23,7 @@ library(readr)
 library(lubridate)
 library(DT)
 
-# ---- Paleta CISNit ---------------------------------------------------
+# ---- Paleta ---------------------------------------------------
 COR <- list(
   petroleo = "#1A4146", verde = "#40A98A", turquesa = "#12B2AA",
   laranja_queimado = "#E04E05", laranja = "#F75D07", ambar = "#F7AA42",
@@ -189,11 +189,10 @@ css <- paste0(css, ".bslib-sidebar-layout>.sidebar{background:transparent !impor
 
 cabecalho <- div(class = "hdr",
   div(class = "hdr-top",
-    div(class = "chip", if (file.exists("www/logo_cisnit.png")) img(src = "logo_cisnit.png", alt = "CISNit") else strong("CISNit")),
     div(h1("Painel de Calor e Saúde"),
         p("Município de ", NOME, " · Monitoramento de calor extremo, níveis de alerta e impactos na saúde")),
     div(class = "chip", if (file.exists("www/logo_prefeitura.png")) img(src = "logo_prefeitura.png", alt = "Prefeitura de Niterói") else strong("Prefeitura de Niterói"))),
-  div(class = "hdr-sub", if (EH_NIT) "Produzido pelo Centro de Inteligência em Saúde de Niterói (CISNit) · Modelo para subsidiar a gestão (2026)" else paste0("Modelo de painel de apoio à gestão · ", NOME, " · baseado no painel do CISNit (Niterói)")))
+  div(class = "hdr-sub", if (EH_NIT) paste0("Município de ", NOME, " · Dados abertos · Modelo de apoio à decisão (2026)") else paste0("Modelo de painel de apoio à gestão · ", NOME, " · Dados abertos")))
 
 aviso <- function() {
   txt <- "Os níveis e limiares exibidos são provisórios e devem ser calibrados com a análise local."
@@ -219,7 +218,7 @@ nota <- function(...) p(..., class = "nota-graf")
 
 bloco_def <- function(...) div(class = "def-bloco", ...)
 def <- function(rotulo, texto) p(strong(paste0(rotulo, ": ")), texto, style = "margin:2px 0;")
-# Base comum dos graficos echarts: fonte, barra de ferramentas (salvar PNG) e paleta CISNit
+# Base comum dos graficos echarts: fonte, barra de ferramentas (salvar PNG) e paleta
 ec_base <- function(p, trigger = "axis") {
   p |> e_text_style(fontFamily = "Segoe UI", color = COR$petroleo) |>
     e_toolbox_feature(feature = "dataView", title = "Ver dados", readOnly = TRUE, lang = c("Dados", "Fechar", "Atualizar")) |>
@@ -259,11 +258,11 @@ OB_BAIRRO <- { f <- file.path(PASTA, paste0("sim_obitos_bairro_", SLUG, ".csv"))
 DADOS$bairros$k <- chave_b(DADOS$bairros$bairro)
 BAIRROS_ALL <- sort(unique(c(DADOS$bairros$bairro, if (!is.null(OB_BAIRRO)) setdiff(unique(OB_BAIRRO$bairro), "(sem bairro)"))))
 
-card_acao <- function(num, titulo, plano, cisnit, painel, aba_id, aba_nome) {
+card_acao <- function(num, titulo, plano, saude, painel, aba_id, aba_nome) {
   card(card_header(paste0("Ação ", num, " · ", titulo)),
     card_body(
       p(strong("O que o Plano prevê: "), plano),
-      p(strong("Interface do CISNit: "), cisnit),
+      p(strong("Contribuição da saúde: "), saude),
       p(strong("O que este painel entrega: "), painel),
       actionLink(paste0("ir_", aba_id), paste0("Abrir: ", aba_nome), class = "btn btn-sm btn-primary", style = "width:fit-content;color:#fff;")))
 }
@@ -299,7 +298,7 @@ ui <- page_fluid(theme = tema, tags$head(tags$style(HTML(css)), tags$script(HTML
   nav_panel("Apresentação", value = "apres",
     div(class = "pag-centro", style = "width:100%;max-width:900px;margin-left:auto;margin-right:auto;padding:10px 16px;",
       h2(class = "titulo-pag", paste0("Painel de Calor e Saúde de ", NOME)),
-      p(class = "sub-pag", "Modelo de painel de apoio à decisão · CISNit"),
+      p(class = "sub-pag", "Modelo de painel de apoio à decisão"),
       hr(class = "divisor"),
       aviso(),
       p("Este painel reúne séries de temperatura e umidade, níveis de calor, desfechos em saúde (óbitos e internações) e indicadores de vulnerabilidade e refúgios climáticos do município de ", NOME, ", para subsidiar a gestão da Secretaria Municipal de Saúde, da Defesa Civil e da Secretaria do Clima."),
@@ -316,13 +315,13 @@ ui <- page_fluid(theme = tema, tags$head(tags$style(HTML(css)), tags$script(HTML
           tags$tr(tags$td("SIM (óbitos)"), tags$td(selo("mun")), tags$td("Residentes de ", NOME, " (código IBGE ", substr(MUN$cod_ibge_7[1], 1, 6), "), qualquer local de ocorrência.")),
           tags$tr(tags$td("SIH/SUS (internações)"), tags$td(selo("mun")), tags$td("Residentes de ", NOME, " internados na rede SUS; não inclui a rede privada.")),
           tags$tr(tags$td("InfoDengue"), tags$td(selo("mun")), tags$td("Casos estimados de dengue no município, por semana epidemiológica.")),
-          tags$tr(tags$td("Bairros e refúgios"), tags$td(selo("mun")), tags$td("Indicadores por bairro de ", NOME, " (arquivo próprio do CISNit).")),
+          tags$tr(tags$td("Bairros e refúgios"), tags$td(selo("mun")), tags$td("Indicadores por bairro de ", NOME, " (arquivo próprio).")),
           tags$tr(tags$td("Open Data BCN (refúgios)"), tags$td(selo("ref")), tags$td("Barcelona: serve só de modelo de esquema e de lição; não entra nas análises de ", NOME, "."))))
     )),
   # ---------- Acoes do Plano (secao 6.3 do relatorio)
   nav_panel("Ações do Plano (6.3)", value = "acoes",
     div(style = "padding:10px 16px;",
-      h2(class = "titulo-pag", "Ações do Plano com interface direta com o CISNit"),
+      h2(class = "titulo-pag", "Ações do Plano com interface em saúde"),
       p(class = "sub-pag", "Seção 6.3 do relatório técnico · Plano de Adaptação, Mitigação e Resiliência de Niterói (2026)"),
       hr(class = "divisor"),
       aviso(),

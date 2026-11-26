@@ -1,6 +1,6 @@
 # =====================================================================
 # coletar_dados_calor.R   (v2 - corrige falhas de process_sim e httr2/curl)
-# Coleta e EXPORTACAO de dados publicos para analise de calor em um municipio (padrao: Niteroi) (CISNit)
+# Coleta e EXPORTACAO de dados publicos para analise de calor em um municipio (padrao: Niteroi)
 #
 # Fontes:
 #   1. Open-Meteo (serie meteorologica, sem chave de API)
@@ -41,7 +41,7 @@ baixar <- function(url, destino, forcar = FALSE) {
   if (file.exists(destino) && !forcar) { log_msg("ja existe: ", destino); return(invisible(destino)) }
   for (i in 1:3) {
     ok <- tryCatch({ utils::download.file(url, destino, mode = "wb", quiet = TRUE, method = "libcurl",
-                                         headers = c("User-Agent" = "Mozilla/5.0 (CISNit coleta publica)")); file.exists(destino) && file.size(destino) > 0 },
+                                         headers = c("User-Agent" = "Mozilla/5.0 (coleta publica)")); file.exists(destino) && file.size(destino) > 0 },
                    error = function(e) { log_msg("tentativa ", i, " falhou: ", conditionMessage(e)); FALSE },
                    warning = function(w) { log_msg("aviso: ", conditionMessage(w)); FALSE })
     if (ok) { log_msg("baixado: ", destino); return(invisible(destino)) }

@@ -1,6 +1,6 @@
 # calor_niteroi
 
-Calor extremo e saúde em Niterói (CISNit/SMS, cooperação com a OPAS).
+Calor extremo e saúde em Niterói (painel e scripts de coleta com dados abertos).
 
 - `app.R` + `www/`: painel Shiny (bslib, echarts4r). Lê os arquivos de `dados/`.
 - `coletar_dados_calor.R`: coleta dados públicos (Open-Meteo, INMET, SIM/SIH via DATASUS, InfoDengue) e gera `dados/`. A cidade é configurada no topo do script.
