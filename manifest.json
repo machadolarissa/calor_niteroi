@@ -2278,7 +2278,7 @@
   },
   "files": {
     "app.R": {
-      "checksum": "78ebe51d1563c207c6bdf81f4c0d18a4"
+      "checksum": "328d9d6d6cbc7bcc6d046684e3f725d2"
     },
     "dados/base_calor_niteroi_diaria.csv": {
       "checksum": "93083d7ab873e118fc75cdc358308425"
@@ -2300,9 +2300,6 @@
     },
     "dados/ultima_atualizacao.txt": {
       "checksum": "d90246f88b6068fe57dffe93a7cf81fc"
-    },
-    "www/logo_prefeitura.png": {
-      "checksum": "5dadc1d1df9704a0bb48463f57919cc9"
     }
   },
   "users": null

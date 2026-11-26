@@ -190,8 +190,7 @@ css <- paste0(css, ".bslib-sidebar-layout>.sidebar{background:transparent !impor
 cabecalho <- div(class = "hdr",
   div(class = "hdr-top",
     div(h1("Painel de Calor e Saúde"),
-        p("Município de ", NOME, " · Monitoramento de calor extremo, níveis de alerta e impactos na saúde")),
-    div(class = "chip", if (file.exists("www/logo_prefeitura.png")) img(src = "logo_prefeitura.png", alt = "Prefeitura de Niterói") else strong("Prefeitura de Niterói"))),
+        p("Município de ", NOME, " · Monitoramento de calor extremo, níveis de alerta e impactos na saúde"))),
   div(class = "hdr-sub", if (EH_NIT) paste0("Município de ", NOME, " · Dados abertos · Modelo de apoio à decisão (2026)") else paste0("Modelo de painel de apoio à gestão · ", NOME, " · Dados abertos")))
 
 aviso <- function() {
